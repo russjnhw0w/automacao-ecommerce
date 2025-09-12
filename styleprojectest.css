@@ -1,0 +1,271 @@
+/* ======================================================================== */
+/* --- CÓDIGO CSS CORRIGIDO E OTIMIZADO --- */
+/* ======================================================================== */
+
+/* --- Configurações Globais e Variáveis --- */
+:root {
+    --primary-color: #0d6efd;
+    --dark-text: #212529;
+    --body-text: #495057;
+    --light-gray: #f8f9fa;
+    --white: #ffffff;
+    --border-color: #dee2e6;
+}
+
+/* --- Configuração do Layout de Tela Cheia --- */
+html {
+    height: 100%;
+    overflow-y: hidden !important; /* Remove a barra de rolagem principal do navegador */
+}
+
+body {
+    height: 100%; /* Ocupa 100% da altura da tag <html> */
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--white);
+    color: var(--body-text);
+    line-height: 1.6;
+    overflow: hidden !important;
+    
+    /* Transforma o body em um contêiner que organiza os elementos em coluna */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Cabeçalho e Navegação --- */
+.main-header {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 0;
+    z-index: 1000;
+    flex-shrink: 0; /* Impede o header de ser "espremido" */
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--dark-text);
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;    
+}
+
+/* --- Dropdown --- */
+.main-nav-container {
+    position: relative;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    color: var(--body-text);
+    font-family: 'Poppins', sans-serif;
+    font-size: 2em;
+    font-weight: 500;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-btn:hover {
+    background-color: var(--light-gray);
+    color: #000;
+}
+
+.dropdown-btn .fa-chevron-down {
+    font-size: 0.8em;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.dropdown-content {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    min-width: 280px;
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 10px 30px rgba(158, 156, 156, 0.1);
+    border: 1px solid #f0f0f0;
+    z-index: 100;
+}
+
+.dropdown-content.main-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dropdown-content.main-nav a {
+    color: var(--dark-text);
+    font-weight: 500;
+    padding: 15px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-content.main-nav a:hover {
+    background-color:#4b4b4b;
+    color: var(--white);
+    transform: translateX(5px);
+}
+
+.dropdown:hover .dropdown-content {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown:hover .dropdown-btn .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+/* --- Seção Principal (Hero e Cards) --- */
+.main-content {
+    flex: 1; /* Faz o conteúdo esticar e ocupar o espaço que sobra */
+    overflow-y: auto; /* Adiciona rolagem INTERNA se o conteúdo for maior que a tela */
+    padding: 40px 20px;
+}
+
+.hero-section {
+    max-width: 1200px;
+    margin: 0 auto 80px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+}
+
+.hero-text h1 {
+    font-size: 3.2em;
+    font-weight: 700;
+    color: var(--dark-text);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+.cta-button:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-3px);
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+.company-cards-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 60px;
+}
+
+.company-cards-container h2 {
+    font-size: 2.5em;
+    color: var(--dark-text);
+    margin-bottom: 40px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.company-card {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.company-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.company-card .company-logo {
+    width: 100%;
+    height: 250px;
+    object-fit: scale-down;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.company-card h3 {
+    font-size: 1.5em;
+    color: var(--dark-text);
+    margin: 0 0 10px 0;
+}
+
+/* --- Rodapé --- */
+.main-footer {
+    flex-shrink: 0; /* Impede o rodapé de ser "espremido" */
+    text-align: center;
+    padding: 30px;
+    background-color: var(--light-gray);
+    border-top: 1px solid var(--border-color);
+    color: var(--body-text);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .hero-image {
+        order: -1;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}
+
+
+
