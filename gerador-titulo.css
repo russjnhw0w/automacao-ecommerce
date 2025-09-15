@@ -1,0 +1,244 @@
+/* ================================================= */
+/* --- CSS COMPLETO E CORRIGIDO PARA GERADORES  --- */
+/* ================================================= */
+
+/* --- 1. Configurações Globais e Variáveis --- */
+:root {
+    --primary-color: #0d6efd;
+    --dark-text: #212529;
+    --body-text: #495057;
+    --light-gray: #f8f9fa;
+    --white: #ffffff;
+    --border-color: #dee2e6;
+    --background-color: #f0f2f5;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--body-text);
+}
+
+/* --- 2. Layout de Tela Dividida --- */
+.split-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+    padding: 30px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* --- 3. Coluna da Esquerda (Entradas) --- */
+.input-column {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+}
+
+.generator-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.generator-header .header-icon {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+.generator-header h1 {
+    font-size: 2.2em;
+    color: var(--dark-text);
+    margin: 0;
+}
+.generator-header p {
+    font-size: 1em;
+    color: var(--body-text);
+    margin-top: 8px;
+}
+
+/* --- 4. Coluna da Direita (Resultado) --- */
+.output-column {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.output-header h2 {
+    margin: 0;
+    font-size: 1.8em;
+    color: var(--dark-text);
+}
+
+/* --- 5. Estilos Gerais do Formulário --- */
+.form-section {
+    margin-bottom: 25px;
+}
+label {
+    display: block;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-bottom: 8px;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+input[type="text"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* --- 6. Estilos dos Botões --- */
+.btn-primary, .btn-secondary, .btn-tertiary {
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-primary { background-color: var(--primary-color); color: var(--white); }
+.btn-primary:hover { background-color: #0b5ed7; transform: translateY(-2px); }
+.btn-secondary { background-color: var(--dark-text); color: var(--white); }
+.btn-secondary:hover { background-color: #000; }
+.btn-tertiary { background-color: var(--light-gray); color: var(--dark-text); border: 1px solid var(--border-color); }
+.btn-tertiary:hover { background-color: #e2e6ea; }
+
+/* --- 7. Estilos Específicos do Gerador de Títulos --- */
+.btn-voltar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.output-content-titulos {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.output-content-titulos:empty::before {
+    content: attr(placeholder);
+    color: #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-style: italic;
+}
+
+.titulo-gerado {
+    background-color: var(--light-gray);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--border-color);
+}
+
+.titulo-texto {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+.titulo-contador {
+    font-weight: 600;
+    color: var(--body-text);
+    white-space: nowrap;
+}
+
+.btn-copiar-titulo {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: var(--body-text);
+    transition: color 0.2s;
+}
+
+.btn-copiar-titulo:hover {
+    color: var(--primary-color);
+}
+
+/* --- 8. Estilos para Títulos Inteligentes (Plataformas) --- */
+.titulo-plataforma {
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 15px;
+    color: white;
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+/* CORREÇÃO APLICADA AQUI: Alterado de .ml para .meli */
+.titulo-plataforma.meli {
+    background-color: #ffd100; /* Amarelo do Mercado Livre */
+    color: #333;
+}
+
+.titulo-plataforma.shopee {
+    background-color: #ee4d2d; /* Laranja da Shopee */
+}
+
+.titulo-plataforma.site {
+    background-color: #0d6efd; /* Usando a cor primária do seu tema */
+    color: white;
+}
+
+.contador-excedido {
+    color: #d93025 !important; /* Vermelho de alerta */
+    font-weight: 700;
+}
+
+/* --- 9. Responsividade --- */
+@media (max-width: 1200px) {
+    .split-container {
+        grid-template-columns: 1fr;
+        padding-top: 80px; /* Espaço para o botão voltar não sobrepor */
+    }
+    .btn-voltar {
+        top: 15px;
+        left: 15px;
+    }
+}

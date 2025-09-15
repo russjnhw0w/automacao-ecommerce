@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Títulos - Portal Grupo CSR</title>
+    <!-- Links para Fontes e Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Usaremos o mesmo CSS do gerador de descrição para manter o estilo -->
+    <link rel="stylesheet" href="gerador-titulo.css">
+</head>
+<body>
+    <a href="index.html" class="btn-tertiary btn-voltar">
+        <i class="fas fa-arrow-left"></i> Voltar ao Portal
+    </a>
+
+    <div class="split-container">
+        <!-- Coluna da Esquerda (Entradas ) -->
+        <div class="input-column">
+            <div class="generator-header">
+                <i class="fas fa-pencil-alt header-icon"></i>
+                <h1>Gerador de Títulos</h1>
+                <p>Preencha os campos para criar títulos otimizados.</p>
+            </div>
+
+            <form id="form-titulo" onsubmit="return false;">
+                <div class="form-section">
+                    <label for="nomePeca">Nome da Peça:</label>
+                    <input type="text" id="nomePeca" placeholder="Ex: Coxim Motor Lado Direito">
+                </div>
+                <div class="form-section">
+                    <label for="marcaPeca">Marca da Peça:</label>
+                    <input type="text" id="marcaPeca" placeholder="Ex: Socoxins">
+
+                </div>
+                <div class="form-section">
+                    <label for="veiculos">Veículo(s) de Aplicação:</label>
+                    <input type="text" id="veiculos" placeholder="Ex: Corsa Celta Prisma">
+                </div>
+                <div class="form-section">
+                    <label for="anos">Ano de Aplicação:</label>
+                    <input type="text" id="anos" placeholder="Ex: 2002 a 2012 ou 2008...">
+                </div>
+                <div class="form-section">
+                    <label for="especificacoes">Especificações (Opcional):</label>
+                    <input type="text" id="especificacoes" placeholder="Ex: Com Ar / Motor 1.4 / 8v">
+                </div>
+                <div class="form-section">
+                    <label for="codigoPeca">Código da Peça:</label>
+                    <input type="text" id="codigoPeca" placeholder="Ex: SC.12345">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" onclick="gerarTitulos()" class="btn-primary"><i class="fas fa-cogs"></i> Gerar Títulos</button>
+                    <button type="button" onclick="limparCamposTitulo()" class="btn-tertiary"><i class="fas fa-trash"></i> Limpar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Coluna da Direita (Resultados) -->
+        <div class="output-column">
+            <div class="output-header">
+                <h2>Títulos Sugeridos</h2>
+            </div>
+            <div id="copiadoMsg" style="display: none; color: #28a745; margin-bottom: 10px;">Título copiado!</div>
+            
+            <div id="saida-titulos" class="output-content-titulos" placeholder="Os títulos gerados aparecerão aqui...">
+                <!-- Os títulos serão inseridos aqui pelo JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Carregaremos um novo arquivo JS para esta página -->
+    <script src="gerador-titulo.js"></script>
+</body>
+</html>
