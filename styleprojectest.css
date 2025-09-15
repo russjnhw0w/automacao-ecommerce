@@ -1,8 +1,8 @@
 /* ======================================================================== */
-/* --- CÓDIGO CSS CORRIGIDO E OTIMIZADO --- */
+/* --- CÓDIGO CSS CORRIGIDO E UNIFICADO --- */
 /* ======================================================================== */
 
-/* --- Configurações Globais e Variáveis --- */
+/* --- 1. Configurações Globais e Variáveis --- */
 :root {
     --primary-color: #0d6efd;
     --dark-text: #212529;
@@ -12,33 +12,29 @@
     --border-color: #dee2e6;
 }
 
-/* --- Configuração do Layout de Tela Cheia --- */
+/* --- 2. Configuração do Layout de Tela Cheia --- */
 html {
     height: 100%;
-    overflow-y: hidden !important; /* Remove a barra de rolagem principal do navegador */
 }
 
 body {
-    height: 100%; /* Ocupa 100% da altura da tag <html> */
+    height: 100%;
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background-color: var(--white);
     color: var(--body-text);
     line-height: 1.6;
-    overflow: hidden !important;
-    
-    /* Transforma o body em um contêiner que organiza os elementos em coluna */
     display: flex;
     flex-direction: column;
 }
 
-/* --- Cabeçalho e Navegação --- */
+/* --- 3. Cabeçalho --- */
 .main-header {
     background-color: var(--white);
     border-bottom: 1px solid var(--border-color);
     padding: 15px 0;
     z-index: 1000;
-    flex-shrink: 0; /* Impede o header de ser "espremido" */
+    flex-shrink: 0;
 }
 
 .header-content {
@@ -58,99 +54,149 @@ body {
 
 .logo a {
     text-decoration: none;
-    color: inherit;    
+    color: inherit;
 }
 
-/* --- Dropdown --- */
+/* ======================================================= */
+/* === CSS PARA MENU DROPDOWN COM SUBMENUS (TEMA CLARO) === */
+/* ======================================================= */
+
+/* --- 4.1. Configuração Base da Navegação --- */
 .main-nav-container {
-    position: relative;
+    /* O HTML já tem position: relative, mas podemos garantir aqui também */
+    /* position: relative; */
 }
 
+.main-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+/* 
+   ===================================================================
+   === CORREÇÃO APLICADA AQUI ===
+   ===================================================================
+   Adicionamos 'position: relative' ao item de lista '.dropdown'.
+   Isso faz com que cada menu suspenso se posicione em relação ao 
+   seu próprio botão pai, em vez de se alinhar ao início da página.
+*/
 .dropdown {
     position: relative;
 }
+/* =================================================================== */
 
-.dropdown-btn {
+
+/* --- 4.2. Estilo do Botão Principal "Ferramentas" (AJUSTADO) --- */
+.dropdown > .dropdown-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    padding: 8px 15px;
+    color: var(--dark-text);
+    text-decoration: none;
     background-color: transparent;
-    color: var(--body-text);
-    font-family: 'Poppins', sans-serif;
-    font-size: 2em;
-    font-weight: 500;
-    padding: 10px 15px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1001;
 }
 
-.dropdown-btn:hover {
+
+.dropdown > .dropdown-btn:hover {
     background-color: var(--light-gray);
-    color: #000;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
-.dropdown-btn .fa-chevron-down {
-    font-size: 0.8em;
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
+/* --- 4.3. Animação e Estilo do Dropdown Principal --- */
 .dropdown-content {
-    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-    min-width: 280px;
+    left: 0; /* Agora esta regra funciona corretamente para todos os menus */
     background-color: var(--white);
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: 0 10px 30px rgba(158, 156, 156, 0.1);
-    border: 1px solid #f0f0f0;
-    z-index: 100;
-}
-
-.dropdown-content.main-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.dropdown-content.main-nav a {
-    color: var(--dark-text);
-    font-weight: 500;
-    padding: 15px 20px;
-    text-decoration: none;
+    min-width: 240px;
     border-radius: 8px;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    list-style: none;
+    padding: 8px 0;
+    margin-top: 10px;
+    z-index: 1000;
 }
 
-.dropdown-content.main-nav a:hover {
-    background-color:#4b4b4b;
-    color: var(--white);
+.dropdown:hover > .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 4.4. Estilo dos Links DENTRO do Dropdown --- */
+.dropdown-content a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--dark-text);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.dropdown-content a:hover {
+    background-color: #eef5ff;
+    color: var(--primary-color);
     transform: translateX(5px);
 }
 
-.dropdown:hover .dropdown-content {
-    opacity: 1;
+/* --- 4.5. Animação e Estilo dos Submenus --- */
+.dropdown-submenu {
+    position: relative;
+}
+
+.submenu-content {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: absolute;
+    top: -9px;
+    left: 100%;
+    background-color: var(--white);
+    min-width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    list-style: none;
+    padding: 8px 0;
+    margin-left: 10px;
+}
+
+.dropdown-submenu:hover > .submenu-content {
     visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    transform: translateX(0);
 }
 
-.dropdown:hover .dropdown-btn .fa-chevron-down {
-    transform: rotate(180deg);
+/* Garante que sub-submenus também funcionem */
+.submenu-content .dropdown-submenu:hover > .submenu-content {
+    top: -9px;
+    left: 100%;
 }
 
-/* --- Seção Principal (Hero e Cards) --- */
+/* --- 5. Seção Principal (Hero e Cards) --- */
 .main-content {
-    flex: 1; /* Faz o conteúdo esticar e ocupar o espaço que sobra */
-    overflow-y: auto; /* Adiciona rolagem INTERNA se o conteúdo for maior que a tela */
+    flex: 1;
+    overflow-y: auto;
     padding: 40px 20px;
 }
 
@@ -174,11 +220,6 @@ body {
 .hero-text p {
     font-size: 1.1em;
     margin-bottom: 30px;
-}
-
-.cta-button:hover {
-    background-color: #0b5ed7;
-    transform: translateY(-3px);
 }
 
 .hero-image img {
@@ -234,9 +275,9 @@ body {
     margin: 0 0 10px 0;
 }
 
-/* --- Rodapé --- */
+/* --- 6. Rodapé --- */
 .main-footer {
-    flex-shrink: 0; /* Impede o rodapé de ser "espremido" */
+    flex-shrink: 0;
     text-align: center;
     padding: 30px;
     background-color: var(--light-gray);
@@ -244,7 +285,7 @@ body {
     color: var(--body-text);
 }
 
-/* --- Responsividade --- */
+/* --- 7. Responsividade --- */
 @media (max-width: 992px) {
     .hero-section {
         grid-template-columns: 1fr;
@@ -266,6 +307,3 @@ body {
         gap: 15px;
     }
 }
-
-
-
