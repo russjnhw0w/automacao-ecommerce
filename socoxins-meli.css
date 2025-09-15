@@ -1,0 +1,173 @@
+/* ================================================= */
+/* --- CSS DO GERADOR (TEMA CLARO / SPLIT-SCREEN) --- */
+/* ================================================= */
+
+/* --- 1. Configurações Globais e Variáveis (TEMA CLARO) --- */
+:root {
+    --primary-color: #0d6efd;
+    --dark-text: #212529;
+    --body-text: #495057;
+    --light-gray: #f8f9fa;
+    --white: #ffffff;
+    --border-color: #dee2e6;
+    --background-color: #f0f2f5; /* Fundo da página cinza bem claro */
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--body-text);
+}
+
+/* --- 2. Layout de Tela Dividida --- */
+.split-container {
+    display: grid;
+    /* Em telas grandes, cria duas colunas. A da direita é um pouco maior (1.2fr) */
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px; /* Espaço entre as colunas */
+    padding: 30px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* --- 3. Coluna da Esquerda (Entradas) --- */
+.input-column {
+    background-color: var(#f5ecec);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito grande */
+}
+
+.generator-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.generator-header .header-icon { font-size: 2em; color: var(--primary-color); margin-bottom: 10px; }
+.generator-header h1 { font-size: 2.2em; color: var(--dark-text); margin: 0; }
+.generator-header p { font-size: 1em; color: var(--body-text); margin-top: 8px; }
+
+/* Contêiner que agrupa o H2 e a imagem */
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Garante a centralização do conjunto */
+    gap: 15px; /* Espaço entre o título e a imagem */
+    margin-top: 15px; /* Adiciona um espaço acima, separando do H1 */
+}
+
+/* Estilização do H2 dentro do contêiner */
+.title-container h2 {
+    margin: 0; /* Remove a margem padrão para um alinhamento perfeito */
+    font-size: 2.5em; /* Ajuste o tamanho da fonte se necessário */
+    color: var(--dark-text);
+}
+
+/* Estilização da imagem do logo */
+.logo-img {
+    width: 200px;         /* <<-- AJUSTE PRINCIPAL: Aumente a largura da imagem */
+    height: auto;        /* Mantém a proporção correta */
+    border-radius: 8px;  /* Bordas arredondadas (opcional) */
+    vertical-align: middle; /* Melhora o alinhamento em alguns navegadores */
+}
+
+/* Estilização geral do cabeçalho (opcional, para organização) */
+.generator-header {
+    display: flex;
+    flex-direction: column; /* Organiza os itens do cabeçalho em coluna */
+    align-items: center;    /* Centraliza tudo no cabeçalho */
+    text-align: center;
+}
+
+/* Estilização do H2 (opcional) */
+h2 {
+    margin: 0; /* Remove a margem padrão do h2 para um melhor alinhamento */
+}
+
+
+/* --- 4. Coluna da Direita (Resultado) --- */
+.output-column {
+    background-color: var(#f5ecec);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column; /* Organiza o conteúdo verticalmente */
+}
+
+.output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.output-header h2 { margin: 0; font-size: 1.8em; color: var(--dark-text); }
+
+/* A área de texto do resultado */
+.output-content {
+    flex-grow: 1; /* Faz a área de resultado ocupar todo o espaço vertical disponível */
+    background-color: var(--light-gray);
+    padding: 20px;
+    border-radius: 8px;
+    white-space: pre-wrap; /* Essencial para que o texto quebre a linha corretamente */
+    word-wrap: break-word;
+    overflow-y: auto; /* Adiciona scroll se a descrição for muito longa */
+    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada para melhor visualização */
+    font-size: 1.3em;
+    color: #333;
+}
+/* Estilo para o placeholder do resultado */
+.output-content:empty::before {
+    content: attr(placeholder);
+    color: #999;
+}
+
+
+/* --- 5. Estilos Gerais do Formulário (Aplicado em ambas as colunas se necessário) --- */
+.form-section { margin-bottom: 25px; }
+label { display: block; font-weight: 600; color: var(--dark-text); margin-bottom: 8px; }
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+input[type="text"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+}
+
+.form-actions { display: flex; justify-content: center; margin-top: 20px; }
+
+/* --- 6. Estilos dos Botões --- */
+.btn-primary, .btn-secondary, .btn-tertiary {
+    padding: 12px 25px; font-size: 1em; font-weight: 600; border-radius: 8px;
+    border: none; cursor: pointer; transition: all 0.3s ease;
+    display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary { background-color: var(--primary-color); color: var(--white); }
+.btn-primary:hover { background-color: #0b5ed7; transform: translateY(-2px); }
+.btn-secondary { background-color: var(--dark-text); color: var(--white); }
+.btn-secondary:hover { background-color: #000; }
+.btn-tertiary { background-color: var(--light-gray); color: var(--dark-text); border: 1px solid var(--border-color); }
+.btn-tertiary:hover { background-color: #e2e6ea; }
+
+
+/* --- 7. Responsividade --- */
+@media (max-width: 1200px) {
+    .split-container {
+        /* Em telas menores, as colunas ficam uma sobre a outra */
+        grid-template-columns: 1fr;
+    }
+}
