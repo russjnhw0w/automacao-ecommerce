@@ -74,7 +74,7 @@ function preencherCampos() {
   // Lista completa de siglas
   const siglas = [
     'AE', 'AM', 'AT', 'BA', 'BC', 'BD', 'BE', 'BG', 'BI', 'BL', 'BM', 'BO', 'BT', 'BX', 'CA', 'CB', 'CC', 'CD', 
-    'CE', 'CI', 'CKC', 'CM', 'CO', 'CP', 'CR', 'CT', 'CV', 'DF', 'EM', 'EV', 'FL', 'HM', 'HV', 'IO', 'JH', 'LA', 
+    'CE', 'CI', 'CKC','CKS','CH', 'CM', 'CO', 'CP', 'CR', 'CT', 'CV', 'DF', 'EM', 'EV', 'FL', 'HM', 'HV', 'IO', 'JH', 'LA', 
     'LI', 'MA', 'MBC', 'MG', 'MP', 'PF', 'PL', 'PV', 'QM', 'RA', 'RD', 'RDE', 'RE', 'RL', 'RMO', 'RQD', 'RSC', 
     'RTR', 'SA', 'SB', 'SC', 'SD', 'SE', 'SF', 'SG', 'SH', 'SL', 'SM', 'SO', 'SP', 'SR', 'SRO', 'SS', 'ST', 'SV', 
     'SW', 'SZ', 'TB', 'TD', 'TM', 'TO', 'TP', 'TR', 'TS', 'TZ', 'VB', 'VS', 'VT', 'CK' // Adicionado CK também
@@ -182,4 +182,5 @@ function gerarDescricao() {
     atualizarHistorico();
   }
 }
+
 
