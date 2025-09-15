@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Descrição - Grupo CSR</title>
+
+    <!-- Links para Fontes e Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS exclusivo desta página -->
+    <link rel="stylesheet" href="descricao-checkmat.css">
+</head>
+<body>
+ <a href="index.html" class="btn-tertiary">
+    <i class="fas fa-arrow-left"></i> Voltar ao Portal
+</a>
+
+    <!-- Contêiner principal que cria o layout de duas colunas -->
+    <div class="split-container">
+
+        <!-- ======================= COLUNA DA ESQUERDA (ENTRADAS ) ======================= -->
+        <div class="input-column">
+            
+            <div class="generator-header">
+                <i class="fas fa-cogs header-icon"></i>
+                <h1>Gerador de Descrição</h1>
+
+                <div class="title-container">
+                <img src="mercadolivre-site-removebg-preview.png" alt="Logo MercadoLivre" class="logo-img">
+                <h2>CheckMat Parts</h2>
+                
+                </div>
+                <p>Preencha os campos para criar a descrição do produto.</p>
+            </div>
+
+            <form class="generator-form" onsubmit="return false;">
+                <div class="form-section">
+                    <label for="descricaoAntiga">1. Cole a descrição antiga:</label>
+                    <textarea id="descricaoAntiga" rows="5" placeholder="Cole a descrição completa do anúncio antigo aqui..."></textarea>
+                    <button type="button" onclick="preencherCampos()" class="btn-secondary"><i class="fas fa-paste"></i> Preencher Campos</button>
+                    <p id="infoAlterados" style="margin-top: 10px; font-size: 0.9em;"></p>
+                </div>
+
+                <div class="form-section data-fields">
+                    <label>2. Verifique os campos extraídos:</label>
+                    <div class="form-group">
+                        <label for="codigo">Código CheckMat Parts:</label>
+                        <input type="text" id="codigo" placeholder="Ex: CK12345">
+                    </div>
+                    <div class="form-group">
+                        <label for="ref">Referência:</label>
+                        <input type="text" id="ref" placeholder="Ex: 90.448.933">
+                    </div>
+                    <div class="form-group">
+                        <label for="especificacao">Especificação:</label>
+                        <input type="text" id="especificacao" placeholder="Ex: Coxim do Amortecedor Dianteiro">
+                    </div>
+                    <div class="form-group">
+                        <label for="aplicacao">Peça aplicada em:</label>
+                        <textarea id="aplicacao" rows="6" placeholder="A lista de aplicações aparecerá aqui..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="oem">OEM (Numeração Original):</label>
+                        <input type="text" id="oem" placeholder="Ex: 90448933, 93281333">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" onclick="gerarDescricao()" class="btn-primary"><i class="fas fa-cogs"></i> Gerar Nova Descrição</button>
+                    <button type="button" onclick="copiarDescricao()" class="btn-tertiary"><i class="fas fa-copy"></i> Copiar Descrição</button>
+                    
+                </div>
+            </form>
+        </div>
+
+        <!-- ======================= COLUNA DA DIREITA (RESULTADO) ======================= -->
+        <div class="output-column">
+            <div class="output-header">
+                <h2>Resultado</h2>
+                
+            </div>
+            <div id="copiadoMsg" style="display: none; color: #28a745; margin-bottom: 10px;">Copiado para a área de transferência!</div>
+            
+            <!-- O <pre> preserva as quebras de linha e espaços da descrição gerada -->
+            <pre id="saida" class="output-content" placeholder="A nova descrição gerada aparecerá aqui..."></pre>
+            
+            <!-- Seção para o histórico, se você quiser usá-la -->
+            <div id="historico" class="form-section"></div>
+            <div id="contadorDescricoes"></div>
+        </div>
+
+    </div> <!-- Fim do .split-container -->
+
+    <!-- Carrega o seu arquivo JavaScript externo -->
+    <script src="check-meli.js"></script>
+
+</body>
+</html>
