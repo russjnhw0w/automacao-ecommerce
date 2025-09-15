@@ -33,7 +33,7 @@ body {
 
 /* --- 3. Coluna da Esquerda (Entradas) --- */
 .input-column {
-    background-color: var(--white);
+    background-color: var(#f5ecec);
     padding: 30px;
     border-radius: 16px;
     border: 1px solid var(--border-color);
@@ -49,9 +49,47 @@ body {
 .generator-header h1 { font-size: 2.2em; color: var(--dark-text); margin: 0; }
 .generator-header p { font-size: 1em; color: var(--body-text); margin-top: 8px; }
 
+/* Contêiner que agrupa o H2 e a imagem */
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Garante a centralização do conjunto */
+    gap: 15px; /* Espaço entre o título e a imagem */
+    margin-top: 15px; /* Adiciona um espaço acima, separando do H1 */
+}
+
+/* Estilização do H2 dentro do contêiner */
+.title-container h2 {
+    margin: 0; /* Remove a margem padrão para um alinhamento perfeito */
+    font-size: 2.5em; /* Ajuste o tamanho da fonte se necessário */
+    color: var(--dark-text);
+}
+
+/* Estilização da imagem do logo */
+.logo-img {
+    width: 200px;         /* <<-- AJUSTE PRINCIPAL: Aumente a largura da imagem */
+    height: auto;        /* Mantém a proporção correta */
+    border-radius: 8px;  /* Bordas arredondadas (opcional) */
+    vertical-align: middle; /* Melhora o alinhamento em alguns navegadores */
+}
+
+/* Estilização geral do cabeçalho (opcional, para organização) */
+.generator-header {
+    display: flex;
+    flex-direction: column; /* Organiza os itens do cabeçalho em coluna */
+    align-items: center;    /* Centraliza tudo no cabeçalho */
+    text-align: center;
+}
+
+/* Estilização do H2 (opcional) */
+h2 {
+    margin: 0; /* Remove a margem padrão do h2 para um melhor alinhamento */
+}
+
+
 /* --- 4. Coluna da Direita (Resultado) --- */
 .output-column {
-    background-color: var(--white);
+    background-color: var(#f5ecec);
     padding: 30px;
     border-radius: 16px;
     border: 1px solid var(--border-color);
