@@ -1,5 +1,5 @@
 /* ======================================================================== */
-/* --- CÓDIGO CSS CORRIGIDO E UNIFICADO --- */
+/* --- CÓDIGO CSS COM LAYOUT DE CABEÇALHO CORRIGIDO (FINAL ) --- */
 /* ======================================================================== */
 
 /* --- 1. Configurações Globais e Variáveis --- */
@@ -10,13 +10,11 @@
     --light-gray: #f8f9fa;
     --white: #ffffff;
     --border-color: #dee2e6;
+    --header-dark-bg: #2c3e50;
 }
 
-/* --- 2. Configuração do Layout de Tela Cheia --- */
-html {
-    height: 100%;
-}
-
+/* --- 2. Layout de Tela Cheia --- */
+html { height: 100%; }
 body {
     height: 100%;
     margin: 0;
@@ -30,280 +28,125 @@ body {
 
 /* --- 3. Cabeçalho --- */
 .main-header {
-    background-color: var(--white);
-    border-bottom: 1px solid var(--border-color);
-    padding: 15px 0;
-    z-index: 1000;
+    background-color: var(--header-dark-bg);
+    padding: 10px 0;
+    z-index: 1001; /* <<-- ADICIONE ESTA LINHA */
+    position: relative; /* <<-- E ESTA LINHA */
     flex-shrink: 0;
+    border-bottom: 1px solid var(--header-dark-bg);
 }
 
 .header-content {
-    max-width: 1200px;
+    max-width: 1200px; 
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between; /* Separa .header-left de .header-actions */
 }
 
-.logo {
-    font-size: 1.5em;
-    font-weight: 600;
-    color: var(--dark-text);
+/* NOVO: Estilo para o grupo da esquerda (logo + menu) */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Espaço entre o logo e o menu */
 }
 
-.logo a {
-    text-decoration: none;
-    color: inherit;
+.logo-image {
+    height: 45px;
+    width: auto;
+    vertical-align: middle;
 }
 
-/* ======================================================= */
-/* === CSS PARA MENU DROPDOWN COM SUBMENUS (TEMA CLARO) === */
-/* ======================================================= */
-
-/* --- 4.1. Configuração Base da Navegação --- */
-.main-nav-container {
-    /* O HTML já tem position: relative, mas podemos garantir aqui também */
-    /* position: relative; */
-}
-
+/* --- 4. Navegação e Dropdowns --- */
 .main-nav {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
+    gap: 15px;
 }
 
-/* 
-   ===================================================================
-   === CORREÇÃO APLICADA AQUI ===
-   ===================================================================
-   Adicionamos 'position: relative' ao item de lista '.dropdown'.
-   Isso faz com que cada menu suspenso se posicione em relação ao 
-   seu próprio botão pai, em vez de se alinhar ao início da página.
-*/
 .dropdown {
     position: relative;
+    display: inline-block; /* <<-- ADICIONE ESTA LINHA */
 }
-/* =================================================================== */
 
-
-/* --- 4.2. Estilo do Botão Principal "Ferramentas" (AJUSTADO) --- */
 .dropdown > .dropdown-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 8px 15px;
-    color: var(--dark-text);
+    color: var(--white);
     text-decoration: none;
     background-color: transparent;
     border: none;
     border-radius: 8px;
-    font-size: 1.2em;
-    font-weight: 600;
+    font-size: 1.1em;
+    font-weight: 500;
     transition: all 0.3s ease;
-    position: relative;
-    z-index: 1001;
 }
-
 
 .dropdown > .dropdown-btn:hover {
-    background-color: var(--light-gray);
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
 }
 
-/* --- 4.3. Animação e Estilo do Dropdown Principal --- */
-.dropdown-content {
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    position: absolute;
-    top: 100%;
-    left: 0; /* Agora esta regra funciona corretamente para todos os menus */
-    background-color: var(--white);
-    min-width: 240px;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--border-color);
-    list-style: none;
-    padding: 8px 0;
-    margin-top: 10px;
-    z-index: 1000;
-}
+.dropdown-content { visibility: hidden; opacity: 0; transform: translateY(-10px); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: absolute; top: 100%; left: 0; background-color: var(--white); min-width: 240px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color); list-style: none; padding: 8px 0; margin-top: 10px; z-index: 1000; }
+.dropdown:hover > .dropdown-content { visibility: visible; opacity: 1; transform: translateY(0); }
+.dropdown-content a { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; color: var(--dark-text); text-decoration: none; transition: all 0.2s ease-in-out; font-size: 1em; font-weight: 500; }
+.dropdown-content a:hover { background-color: #eef5ff; color: var(--primary-color); transform: translateX(5px); }
+.dropdown-submenu { position: relative; }
+.submenu-content { visibility: hidden; opacity: 0; transform: translateX(-10px); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: absolute; top: -9px; left: 100%; background-color: var(--white); min-width: 200px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); border: 1px solid var(--border-color); list-style: none; padding: 8px 0; margin-left: 10px; }
+.dropdown-submenu:hover > .submenu-content { visibility: visible; opacity: 1; transform: translateX(0); }
+.submenu-content .dropdown-submenu:hover > .submenu-content { top: -9px; left: 100%; }
 
-.dropdown:hover > .dropdown-content {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* --- 4.4. Estilo dos Links DENTRO do Dropdown --- */
-.dropdown-content a {
+/* --- 4.5 Ações do Cabeçalho (Ícones) --- */
+.header-actions {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 12px 20px;
-    color: var(--dark-text);
-    text-decoration: none;
-    transition: all 0.2s ease-in-out;
-    font-size: 1em;
-    font-weight: 500;
+    gap: 10px;
 }
 
-.dropdown-content a:hover {
-    background-color: #eef5ff;
-    color: var(--primary-color);
-    transform: translateX(5px);
+.icon-btn {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
 }
 
-/* --- 4.5. Animação e Estilo dos Submenus --- */
-.dropdown-submenu {
-    position: relative;
-}
-
-.submenu-content {
-    visibility: hidden;
-    opacity: 0;
-    transform: translateX(-10px);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    position: absolute;
-    top: -9px;
-    left: 100%;
-    background-color: var(--white);
-    min-width: 200px;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--border-color);
-    list-style: none;
-    padding: 8px 0;
-    margin-left: 10px;
-}
-
-.dropdown-submenu:hover > .submenu-content {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Garante que sub-submenus também funcionem */
-.submenu-content .dropdown-submenu:hover > .submenu-content {
-    top: -9px;
-    left: 100%;
+.icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* --- 5. Seção Principal (Hero e Cards) --- */
-.main-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 40px 20px;
-}
-
-.hero-section {
-    max-width: 1200px;
-    margin: 0 auto 80px auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 50px;
-}
-
-.hero-text h1 {
-    font-size: 3.2em;
-    font-weight: 700;
-    color: var(--dark-text);
-    line-height: 1.2;
-    margin-bottom: 20px;
-}
-
-.hero-text p {
-    font-size: 1.1em;
-    margin-bottom: 30px;
-}
-
-.hero-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-}
-
-.company-cards-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    padding-top: 60px;
-}
-
-.company-cards-container h2 {
-    font-size: 2.5em;
-    color: var(--dark-text);
-    margin-bottom: 40px;
-}
-
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.company-card {
-    background-color: var(--white);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 25px;
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.company-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
-}
-
-.company-card .company-logo {
-    width: 100%;
-    height: 250px;
-    object-fit: scale-down;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.company-card h3 {
-    font-size: 1.5em;
-    color: var(--dark-text);
-    margin: 0 0 10px 0;
-}
+.main-content { flex: 1; overflow-y: auto; padding: 40px 20px; }
+.hero-section { max-width: 1200px; margin: 0 auto 80px auto; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 50px; }
+.hero-text h1 { font-size: 3.2em; font-weight: 700; color: var(--dark-text); line-height: 1.2; margin-bottom: 20px; }
+.hero-text p { font-size: 1.1em; margin-bottom: 30px; }
+.hero-image img { width: 100%; height: auto; border-radius: 12px; }
+.company-cards-container { max-width: 1200px; margin: 0 auto; text-align: center; padding-top: 60px; }
+.company-cards-container h2 { font-size: 2.5em; color: var(--dark-text); margin-bottom: 40px; }
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.company-card { background-color: var(--white); border: 1px solid var(--border-color); border-radius: 12px; padding: 25px; text-align: left; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.company-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08); }
+.company-card .company-logo { width: 100%; height: 250px; object-fit: scale-down; border-radius: 8px; margin-bottom: 20px; }
+.company-card h3 { font-size: 1.5em; color: var(--dark-text); margin: 0 0 10px 0; }
 
 /* --- 6. Rodapé --- */
-.main-footer {
-    flex-shrink: 0;
-    text-align: center;
-    padding: 30px;
-    background-color: var(--light-gray);
-    border-top: 1px solid var(--border-color);
-    color: var(--body-text);
-}
+.main-footer { flex-shrink: 0; text-align: center; padding: 30px; background-color: var(--light-gray); border-top: 1px solid var(--border-color); color: var(--body-text); }
 
 /* --- 7. Responsividade --- */
-@media (max-width: 992px) {
-    .hero-section {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    .hero-image {
-        order: -1;
-    }
-}
-
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .main-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-    }
-}
+@media (max-width: 992px) { .hero-section { grid-template-columns: 1fr; text-align: center; } .hero-image { order: -1; } }
+@media (max-width: 768px) { .header-content { flex-direction: column; gap: 15px; } .main-nav { flex-wrap: wrap; justify-content: center; gap: 15px; } }
