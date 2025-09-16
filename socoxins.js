@@ -45,7 +45,7 @@ function limparCampos() {
 }
 
 // ===================================================================
-// FUNÇÃO 'preencherCampos' COM A LÓGICA DE SIGLAS CORRETAMENTE APLICADA
+// FUNÇÃO 'preencherCampos' COM A LÓGICA DE EXTRAÇÃO MELHORADA
 // ===================================================================
 function preencherCampos() {
   const texto = document.getElementById("descricaoAntiga").value;
@@ -69,9 +69,8 @@ function preencherCampos() {
     }
   };
 
-  // 1. Extrair Código (procurando por QUALQUER sigla da lista)
+  // 1. Extrair Código (lógica mantida, pois já era robusta)
   let codigo = "";
-  // Lista completa de siglas
   const siglas = [
     'AE', 'AM', 'AT', 'BA', 'BC', 'BD', 'BE', 'BG', 'BI', 'BL', 'BM', 'BO', 'BT', 'BX', 'CA', 'CB', 'CC', 'CD', 
     'CE', 'CI', 'CKC','CKS','CH', 'CM', 'CO', 'CP', 'CR', 'CT', 'CV', 'DF', 'EM', 'EV', 'FL', 'HM', 'HV', 'IO', 'JH', 'LA', 
@@ -79,21 +78,17 @@ function preencherCampos() {
     'RTR', 'SA', 'SB', 'SC', 'SD', 'SE', 'SF', 'SG', 'SH', 'SL', 'SM', 'SO', 'SP', 'SR', 'SRO', 'SS', 'ST', 'SV', 
     'SW', 'SZ', 'TB', 'TD', 'TM', 'TO', 'TP', 'TR', 'TS', 'TZ', 'VB', 'VS', 'VT', 'CK'
   ];
-  
-  // Cria uma expressão regular que busca por qualquer uma das siglas seguida de um ponto.
   const regexSiglas = new RegExp(`\\b(${siglas.join('|')})\\.[0-9A-Z-]+\\b`, 'i');
-
   for (const line of lines) {
     const match = line.match(regexSiglas);
     if (match) {
-      codigo = match[0]; // Pega o código completo (ex: SC.12345)
+      codigo = match[0];
       break;
     }
   }
   setFieldValue("codigo", codigo);
 
-
-  // 2. Extrair Referência (procurando por "01 —")
+  // 2. Extrair Referência (lógica mantida)
   let ref = "";
   for (const line of lines) {
     const match = line.trim().match(/^01\s*[—–-]\s*(.*)/);
@@ -104,35 +99,47 @@ function preencherCampos() {
   }
   setFieldValue("ref", ref);
 
-  // 3. Nova Função de Extração de Seção (Mais Simples e Direta)
+  // 3. Nova Função de Extração de Seção (MAIS ROBUSTA)
   const findSection = (startLabels) => {
     let content = [];
     let startIndex = -1;
 
+    // Encontra a linha onde a seção começa
     for (let i = 0; i < lines.length; i++) {
-      const lowerLine = lines[i].toLowerCase().trim();
+      const lowerLine = lines[i].trim().toLowerCase(); // .trim() e toLowerCase() para busca flexível
+      // Verifica se a linha começa com algum dos marcadores
       if (startLabels.some(start => lowerLine.startsWith(start.toLowerCase()))) {
         startIndex = i;
         break;
       }
     }
 
-    if (startIndex === -1) return "";
+    if (startIndex === -1) return ""; // Se não encontrou, retorna vazio
 
+    // Lista de marcadores que indicam o FIM da seção atual
     const ALL_STOP_LABELS = [
-        "especificação:", "peça aplicada em:", "aplicação:", "oem", "obs:", 
+        "especificação", "especificações", "especificacao", "especificacoes",
+        "peça aplicada em:", "aplicação:", "oem", "obs:", 
         "informações sobre o produto", "dúvidas?", "garantia do vendedor", 
         "atenção", "importante!", "antes de efetuar a compra"
     ];
 
+    // Captura o conteúdo da seção
     for (let i = startIndex + 1; i < lines.length; i++) {
       const currentLine = lines[i];
       const lowerTrimmedLine = currentLine.trim().toLowerCase();
 
-      if (ALL_STOP_LABELS.some(stop => lowerTrimmedLine.startsWith(stop))) {
+      // Cria uma lista de marcadores de parada que não inclui os marcadores da seção atual
+      const currentStopLabels = ALL_STOP_LABELS.filter(stop => 
+          !startLabels.some(start => start.toLowerCase().startsWith(stop))
+      );
+
+      // Se a linha atual começar com um marcador de parada, interrompe a captura
+      if (currentStopLabels.some(stop => lowerTrimmedLine.startsWith(stop))) {
         break;
       }
       
+      // Para se encontrar uma linha de separadores (ex: "----------")
       if (lowerTrimmedLine.match(/^(\*|=|-){10,}$/)) {
         break;
       }
@@ -143,7 +150,13 @@ function preencherCampos() {
     return content.join('\n');
   };
 
-  const especificacao = findSection(["Especificação:"]);
+  // Use a nova função com todas as variações para cada campo
+  const especificacao = findSection([
+      "Especificação:", 
+      "Especificações:", 
+      "especificacao:", 
+      "especificacoes:"
+  ]);
   setFieldValue("especificacao", especificacao);
 
   const aplicacao = findSection(["Peça aplicada em:", "Aplicação:"]);
@@ -183,4 +196,3 @@ function gerarDescricao() {
     atualizarHistorico();
   }
 }
-
