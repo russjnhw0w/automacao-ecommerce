@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styleprojectest.css">
     <!-- Font Awesome para os ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- google fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,135 +15,120 @@
 <body>
 
     <header class="main-header">
+        <!-- O .header-content agora alinha os dois grupos: .header-left e .header-actions -->
         <div class="header-content">
-            <div class="logo">
-                <a href="index.html"><strong>Portal</strong> GRUPO CSR</a>
+            
+            <!-- GRUPO DA ESQUERDA: Logo + Menu -->
+            <div class="header-left">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="CSR-Logo-1.png" alt="Portal Grupo CSR" class="logo-image">
+                    </a>
+                </div>
+                
+                <nav class="main-nav-container">
+                    <ul class="main-nav">
+                        <!-- 1. MENU: OPERAÇÕES DE ANÚNCIOS -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-btn nav-btn">Operações de Anúncios <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-content">
+                                <li class="dropdown-submenu">
+                                    <a href="#">Cadastrar Produto <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="submenu-content">
+                                        <li class="dropdown-submenu">
+                                            <a href="#">Gerador de Descrição <i class="fas fa-chevron-right"></i></a>
+                                            <ul class="submenu-content">
+                                                <li class="dropdown-submenu">
+                                                    <a href="#">Shopee <i class="fas fa-chevron-right"></i></a>
+                                                    <ul class="submenu-content">
+                                                        <li><a href="descricao-socoxins2.html">SóCoxins</a></li>
+                                                        <li><a href="descricao-check.html">CheckMat</a></li>
+                                                        <li><a href="#">Rhino Imports</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown-submenu">
+                                                    <a href="#">Mercado Livre <i class="fas fa-chevron-right"></i></a>
+                                                    <ul class="submenu-content">
+                                                        <li><a href="#">SóCoxins</a></li>
+                                                        <li><a href="#">CheckMat</a></li>
+                                                        <li><a href="#">Rhino Imports</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown-submenu">
+                                                    <a href="#">Site <i class="fas fa-chevron-right"></i></a>
+                                                    <ul class="submenu-content">
+                                                        <li><a href="#">SóCoxins</a></li>
+                                                        <li><a href="#">CheckMat</a></li>
+                                                        <li><a href="#">Rhino Imports</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Gerador de Títulos</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="#">Precificar Produto <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="submenu-content">
+                                        <li><a href="#" target="_blank">Planilha de Cálculo</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="#">Consultar Informações <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="submenu-content">
+                                        <li><a href="#">Busca de Códigos</a></li>
+                                        <li><a href="#">Catálogos Técnicos</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- 2. MENU: SUPORTE E VENDAS -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-btn nav-btn">Suporte e Vendas <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-content">
+                                <li><a href="#">Respostas Rápidas (FAQ  )</a></li>
+                                <li class="dropdown-submenu">
+                                    <a href="#">Procedimentos (SOPs) <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="submenu-content">
+                                        <li><a href="#">Como Tratar Devoluções</a></li>
+                                        <li><a href="#">Processo de Garantia</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- 3. MENU: BASE DE CONHECIMENTO -->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-btn nav-btn">Base de Conhecimento <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-content">
+                                <li class="dropdown-submenu">
+                                    <a href="#">Onboarding <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="submenu-content">
+                                        <li><a href="#">Nossa História e Cultura</a></li>
+                                        <li><a href="#">Quem é Quem?</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown-submenu">
+                                    <a href="#">Nossas Marcas <i class="fas fa-chevron-right"></i></a>
+                                    <ul class="submenu-content">
+                                        <li><a href="#">Sobre a SóCoxins</a></li>
+                                        <li><a href="#">Sobre a CheckMat</a></li>
+                                        <li><a href="#">Sobre a Rhino Imports</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
             </div>
-            
-            <!-- ================================================== -->
-            <!-- === INÍCIO DA SEÇÃO DE NAVEGAÇÃO               === -->
-            <!-- ================================================== -->
-            <nav class="main-nav-container">
-                <ul class="main-nav">
-            
-                    <!-- 1. MENU: OPERAÇÕES DE ANÚNCIOS -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-btn nav-btn">Operações de Anúncios <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-content">
-                            
-                            <!-- Submenu: Cadastrar Produto -->
-                            <li class="dropdown-submenu">
-                                <a href="#">Cadastrar Produto <i class="fas fa-chevron-right"></i></a>
-                                <ul class="submenu-content">
-                                    
-                                    <!-- Nível 3: Gerador de Descrição -->
-                                    <li class="dropdown-submenu">
-                                        <a href="#">Gerador de Descrição <i class="fas fa-chevron-right"></i></a>
-                                        <ul class="submenu-content">
-            
-                                            <!-- Nível 4: Plataforma Shopee -->
-                                            <li class="dropdown-submenu">
-                                                <a href="#">Shopee <i class="fas fa-chevron-right"></i></a>
-                                                <ul class="submenu-content">
-                                                    <li><a href="descricao-socoxins2.html">SóCoxins</a></li>
-                                                    <li><a href="descricao-check.html">CheckMat</a></li>
-                                                    <li><a href="#">Rhino Imports</a></li>
-                                                </ul>
-                                            </li>
-            
-                                            <!-- Nível 4: Plataforma Mercado Livre -->
-                                            <li class="dropdown-submenu">
-                                                <a href="#">Mercado Livre <i class="fas fa-chevron-right"></i></a>
-                                                <ul class="submenu-content">
-                                                    <li><a href="socoxins-meli.html">SóCoxins</a></li>
-                                                    <li><a href="check-meli.html">CheckMat</a></li>
-                                                    <li><a href="#">Rhino Imports</a></li>
-                                                </ul>
-                                            </li>
-            
-                                            <!-- Nível 4: Plataforma Site -->
-                                            <li class="dropdown-submenu">
-                                                <a href="#">Site <i class="fas fa-chevron-right"></i></a>
-                                                <ul class="submenu-content">
-                                                    <li><a href="#">SóCoxins</a></li>
-                                                    <li><a href="#">CheckMat</a></li>
-                                                    <li><a href="#">Rhino Imports</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    
-                                    <li><a href="gerador-titulo.html">Gerador de Títulos</a></li>
-                                </ul>
-                            </li>
-            
-                            <!-- Outros submenus de Operações de Anúncios -->
-                            <li class="dropdown-submenu">
-                                <a href="#">Planilhas <i class="fas fa-chevron-right"></i></a>
-                                <ul class="submenu-content">
-                                    <li><a href="#" target="_blank">Planilha de Cálculo</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="#">Consultar Informações <i class="fas fa-chevron-right"></i></a>
-                                <ul class="submenu-content">
-                                    <li><a href="#">Busca de Códigos</a></li>
-                                    <li><a href="#">Catálogos Técnicos</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-            
-                    <!-- 2. MENU: SUPORTE E VENDAS -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-btn nav-btn">Suporte e Vendas <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-content">
-                            <li><a href="#">Respostas Rápidas FAQ</a></li>
-                            <li class="dropdown-submenu">
-                                <a href="#">Procedimentos <i class="fas fa-chevron-right"></i></a>
-                                <ul class="submenu-content">
-                                    <li><a href="#">Como Tratar Devoluções</a></li>
-                                    <li><a href="#">Processo de Garantia</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-            
-                    <!-- 3. MENU: BASE DE CONHECIMENTO -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-btn nav-btn">Base de Conhecimento <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-content">
-                            <li class="dropdown-submenu">
-                                <a href="#">Onboarding <i class="fas fa-chevron-right"></i></a>
-                                <ul class="submenu-content">
-                                    <li><a href="#">Nossa História e Cultura</a></li>
-                                    <li><a href="#">Quem é Quem?</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown-submenu">
-                                <a href="#">Nossas Marcas <i class="fas fa-chevron-right"></i></a>
-                                <ul class="submenu-content">
-                                    <li><a href="#">Sobre a SóCoxins</a></li>
-                                    <li><a href="#">Sobre a CheckMat</a></li>
-                                    <li><a href="#">Sobre a Rhino Imports</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-            
-                </ul>
-            </nav>
-            
-            <!-- Ícone de Configurações -->
+
+            <!-- GRUPO DA DIREITA: Ícones de Ação -->
             <div class="header-actions">
+                <!-- Botão de tema que podemos reativar depois -->
+                <!-- <button id="themeToggle" class="icon-btn" aria-label="Alternar tema">🌙</button> -->
                 <a href="#" class="icon-btn" aria-label="Configurações">
                     <i class="fas fa-cog"></i>
                 </a>
             </div>
-            <!-- ================================================== -->
-            <!-- === FIM DA SEÇÃO DE NAVEGAÇÃO                  === -->
-            <!-- ================================================== -->
-
         </div>
     </header>
 
@@ -152,11 +137,11 @@
             <div class="hero-text">
                 <h1>Bem-vindo ao seu Painel de Ferramentas</h1>
                 <p>Acesse rapidamente os geradores de descrição e consulte informações essenciais sobre nossas empresas.</p>
-                
             </div>
             <div class="hero-image">
-                <!-- Imagem genérica de um escritório ou algo relacionado ao seu negócio -->
-                <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Equipe trabalhando">
+                <a href="https://grupocsr.com.br/">
+                <img src="CSR-Banner-Hero.png" alt="Equipe trabalhando">
+                </a>
             </div>
         </div>
 
@@ -171,7 +156,6 @@
                     <h3>SóCoxins</h3>
                     <p>Especializada em coxins automotivos, atendendo todo o Brasil através de plataformas de e-commerce e site próprio.</p>
                 </div>
-
                 <!-- CheckMat Parts -->
                 <div class="company-card">
                     <a href="https://checkmatparts.com.br/">
@@ -180,7 +164,6 @@
                     <h3>CheckMat Parts</h3>
                     <p>Focada em peças de alta performance, com forte presença no Mercado Livre e Shopee para o público entusiasta.</p>
                 </div>
-
                 <!-- RhinoImports LTDA -->
                 <div class="company-card">
                     <a href="https://rhinoimports.com.br/">
@@ -188,13 +171,10 @@
                     </a>
                     <h3>Rhino Imports LTDA</h3>
                     <p>Especializada na importação de peças e componentes para bicicletas. Conecta o mercado brasileiro aos melhores fabricantes globais para lojistas e montadoras.</p>
-                    
                 </div>
             </div>
         </div>
     </main>
-
-    
 
     <footer class="main-footer">
         <p>&copy; 2025 Grupo CSR. Todos os direitos reservados.</p>
@@ -202,8 +182,3 @@
 
 </body>
 </html>
-
-
-
-
-
