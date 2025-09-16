@@ -47,144 +47,114 @@ function limparCampos() {
 // ===================================================================
 // FUNÇÃO 'preencherCampos' COM LÓGICA DE EXTRAÇÃO CORRIGIDA
 // ===================================================================
+// ===================================================================
+// FUNÇÃO 'preencherCampos' - VERSÃO CORRIGIDA E SIMPLIFICADA
+// ===================================================================
 function preencherCampos() {
-  const texto = document.getElementById("descricaoAntiga").value;
-  if (!texto.trim()) {
-    alert("Cole uma descrição antiga primeiro!");
-    return;
-  }
-  
-  const lines = texto.split("\n");
-  let alterados = 0;
-
-  const setFieldValue = (id, value) => {
-    const campo = document.getElementById(id);
-    const finalValue = value.trim();
-    if (campo.value !== finalValue) {
-      campo.value = finalValue;
-      if (finalValue) {
-        destacarCampo(id);
-        alterados++;
-      }
-    }
-  };
-
-  // 1. Extrair Código (Lógica mantida)
-  let codigo = "";
-  const siglas = [
-    'AE', 'AM', 'AT', 'BA', 'BC', 'BD', 'BE', 'BG', 'BI', 'BL', 'BM', 'BO', 'BT', 'BX', 'CA', 'CB', 'CC', 'CD', 
-    'CE', 'CI', 'CKC','CKS','CH', 'CM', 'CO', 'CP', 'CR', 'CT', 'CV', 'DF', 'EM', 'EV', 'FL', 'HM', 'HV', 'IO', 'JH', 'LA', 
-    'LI', 'MA', 'MBC', 'MG', 'MP', 'PF', 'PL', 'PV', 'QM', 'RA', 'RD', 'RDE', 'RE', 'RL', 'RMO', 'RQD', 'RSC', 
-    'RTR', 'SA', 'SB', 'SC', 'SD', 'SE', 'SF', 'SG', 'SH', 'SL', 'SM', 'SO', 'SP', 'SR', 'SRO', 'SS', 'ST', 'SV', 
-    'SW', 'SZ', 'TB', 'TD', 'TM', 'TO', 'TP', 'TR', 'TS', 'TZ', 'VB', 'VS', 'VT', 'CK'
-  ];
-  const regexSiglas = new RegExp(`\\b(${siglas.join('|')})\\.[0-9A-Z-]+\\b`, 'i');
-  for (const line of lines) {
-    const match = line.match(regexSiglas);
-    if (match) {
-      codigo = match[0];
-      break;
-    }
-  }
-  setFieldValue("codigo", codigo);
-
-  // 2. Extrair Referência (Lógica mantida)
-  let ref = "";
-  for (const line of lines) {
-    const match = line.trim().match(/^01\s*[—–-]\s*(.*)/);
-    if (match && match[1]) {
-      ref = match[1].trim();
-      break;
-    }
-  }
-  setFieldValue("ref", ref);
-
-  // Marcadores de parada para todas as seções
-  const ALL_STOP_LABELS = [
-      "especificação", "especificações", "especificacao", "especificacoes",
-      "peça aplicada em:", "aplicação:", "oem", "obs:", 
-      "informações sobre o produto", "dúvidas?", "garantia do vendedor", 
-      "atenção", "importante!", "antes de efetuar a compra"
-  ];
-
-  // 3. NOVA FUNÇÃO DE EXTRAÇÃO (Mais inteligente)
-  const findContent = (labels) => {
-    let content = [];
-    let startIndex = -1;
-    let contentOnSameLine = "";
-
-    // Procura a linha que contém o marcador
-    for (let i = 0; i < lines.length; i++) {
-      const lowerLine = lines[i].trim().toLowerCase();
-      for (const label of labels) {
-        if (lowerLine.startsWith(label.toLowerCase())) {
-          startIndex = i;
-          // Verifica se há conteúdo na mesma linha, após o marcador
-          const potentialContent = lines[i].trim().substring(label.length).trim();
-          if (potentialContent) {
-            contentOnSameLine = potentialContent;
-          }
-          break;
-        }
-      }
-      if (startIndex !== -1) break;
+    const texto = document.getElementById("descricaoAntiga").value;
+    if (!texto.trim()) {
+        alert("Cole uma descrição antiga primeiro!");
+        return;
     }
 
-    if (startIndex === -1) return ""; // Marcador não encontrado
+    const lines = texto.split("\n");
+    let alterados = 0;
 
-    // Se encontrou conteúdo na mesma linha, retorna ele imediatamente.
-    if (contentOnSameLine) {
-        // Verifica se a próxima linha não é um marcador de parada. Se não for, pode ser uma continuação.
-        if (lines.length > startIndex + 1) {
-            const nextLineTrimmed = lines[startIndex + 1].trim().toLowerCase();
-            const isStopLabel = ALL_STOP_LABELS.some(stop => nextLineTrimmed.startsWith(stop));
-            if (!isStopLabel && nextLineTrimmed) {
-                 // Se não for um marcador de parada, assume que é uma continuação e busca o resto do bloco.
-            } else {
-                return contentOnSameLine; // Se a próxima linha é um marcador, retorna só o conteúdo da mesma linha.
+    const setFieldValue = (id, value) => {
+        const campo = document.getElementById(id);
+        const finalValue = value.trim();
+        if (campo.value !== finalValue) {
+            campo.value = finalValue;
+            if (finalValue) {
+                destacarCampo(id);
+                alterados++;
             }
-        } else {
-            return contentOnSameLine;
+        }
+    };
+
+    // --- Lógica de Extração (Mantida) ---
+    let codigo = "";
+    const siglas = ['AE', 'AM', 'AT', 'BA', 'BC', 'BD', 'BE', 'BG', 'BI', 'BL', 'BM', 'BO', 'BT', 'BX', 'CA', 'CB', 'CC', 'CD', 'CE', 'CI', 'CKC', 'CKS', 'CH', 'CM', 'CO', 'CP', 'CR', 'CT', 'CV', 'DF', 'EM', 'EV', 'FL', 'HM', 'HV', 'IO', 'JH', 'LA', 'LI', 'MA', 'MBC', 'MG', 'MP', 'PF', 'PL', 'PV', 'QM', 'RA', 'RD', 'RDE', 'RE', 'RL', 'RMO', 'RQD', 'RSC', 'RTR', 'SA', 'SB', 'SC', 'SD', 'SE', 'SF', 'SG', 'SH', 'SL', 'SM', 'SO', 'SP', 'SR', 'SRO', 'SS', 'ST', 'SV', 'SW', 'SZ', 'TB', 'TD', 'TM', 'TO', 'TP', 'TR', 'TS', 'TZ', 'VB', 'VS', 'VT', 'CK'];
+    const regexSiglas = new RegExp(`\\b(${siglas.join('|')})\\.[0-9A-Z-]+\\b`, 'i');
+    for (const line of lines) {
+        const match = line.match(regexSiglas);
+        if (match) {
+            codigo = match[0];
+            break;
         }
     }
+    setFieldValue("codigo", codigo);
 
-    // Se não havia conteúdo na mesma linha, captura as linhas seguintes
-    for (let i = startIndex + 1; i < lines.length; i++) {
-      const currentLine = lines[i];
-      const lowerTrimmedLine = currentLine.trim().toLowerCase();
-
-      const stopLabelsForThisSection = ALL_STOP_LABELS.filter(stop => 
-          !labels.some(start => start.toLowerCase().startsWith(stop))
-      );
-
-      if (stopLabelsForThisSection.some(stop => lowerTrimmedLine.startsWith(stop))) {
-        break;
-      }
-      if (lowerTrimmedLine.match(/^(\*|=|-){10,}$/)) {
-        break;
-      }
-      content.push(currentLine);
+    let ref = "";
+    for (const line of lines) {
+        const match = line.trim().match(/^01\s*[—–-]\s*(.*)/);
+        if (match && match[1]) {
+            ref = match[1].trim();
+            break;
+        }
     }
-    
-    return content.join('\n');
-  };
+    setFieldValue("ref", ref);
 
-  // Usa a nova função para extrair os dados
-  const especificacao = findContent([
-      "Especificação:", 
-      "Especificações:", 
-      "especificacao:", 
-      "especificacoes:"
-  ]);
-  setFieldValue("especificacao", especificacao);
+    // --- NOVA LÓGICA DE EXTRAÇÃO DE SEÇÃO (MUITO MAIS SIMPLES) ---
+    const findSectionContent = (startLabels, stopLabels) => {
+        let content = [];
+        let startIndex = -1;
 
-  const aplicacao = findContent(["Peça aplicada em:", "Aplicação:"]);
-  setFieldValue("aplicacao", aplicacao);
+        // 1. Encontra a linha inicial e extrai conteúdo da mesma linha, se houver
+        for (let i = 0; i < lines.length; i++) {
+            const trimmedLine = lines[i].trim();
+            for (const label of startLabels) {
+                if (trimmedLine.toLowerCase().startsWith(label.toLowerCase())) {
+                    startIndex = i;
+                    const contentOnSameLine = trimmedLine.substring(label.length).trim();
+                    if (contentOnSameLine) {
+                        return contentOnSameLine; // Encontrou na mesma linha, retorna imediatamente
+                    }
+                    break;
+                }
+            }
+            if (startIndex !== -1) break;
+        }
 
-  const oem = findContent(["OEM (NUMERAÇÃO ORIGINAL DA PEÇA):", "OEM"]);
-  setFieldValue("oem", oem);
+        if (startIndex === -1) return ""; // Se não achou o marcador, retorna vazio
 
-  document.getElementById("infoAlterados").textContent = `🛠️ Campos alterados: ${alterados}`;
+        // 2. Se não havia conteúdo na mesma linha, busca nas linhas seguintes
+        for (let i = startIndex + 1; i < lines.length; i++) {
+            const currentLine = lines[i];
+            const lowerTrimmedLine = currentLine.trim().toLowerCase();
+
+            // Para se encontrar qualquer marcador de parada
+            if (stopLabels.some(stop => lowerTrimmedLine.startsWith(stop.toLowerCase()))) {
+                break;
+            }
+            // Para se encontrar uma linha de separadores (ex: "----------")
+            if (lowerTrimmedLine.match(/^(\*|=|-){10,}$/)) {
+                break;
+            }
+            content.push(currentLine);
+        }
+        return content.join('\n');
+    };
+
+    // Define os marcadores de início e parada para cada campo
+    const especificacaoLabels = ["Especificação:", "Especificações:", "especificacao:", "especificacoes:"];
+    const aplicacaoLabels = ["Peça aplicada em:", "Aplicação:"];
+    const oemLabels = ["OEM (NUMERAÇÃO ORIGINAL DA PEÇA):", "OEM"];
+    const obsLabels = ["Obs:"];
+
+    // Define todos os marcadores que podem parar uma seção
+    const allStopLabels = [...aplicacaoLabels, ...oemLabels, ...obsLabels, "informações sobre o produto", "atenção", "importante!"];
+
+    // Executa a busca para cada campo
+    const especificacao = findSectionContent(especificacaoLabels, allStopLabels);
+    const aplicacao = findSectionContent(aplicacaoLabels, [...oemLabels, ...obsLabels, "informações sobre o produto", "atenção"]);
+    const oem = findSectionContent(oemLabels, [...obsLabels, "informações sobre o produto", "atenção"]);
+
+    setFieldValue("especificacao", especificacao);
+    setFieldValue("aplicacao", aplicacao);
+    setFieldValue("oem", oem);
+
+    document.getElementById("infoAlterados").textContent = `🛠️ Campos alterados: ${alterados}`;
 }
 // ===================================================================
 // FIM DA FUNÇÃO 'preencherCampos'
@@ -215,4 +185,5 @@ function gerarDescricao() {
     atualizarHistorico();
   }
 }
+
 
