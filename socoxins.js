@@ -45,7 +45,7 @@ function limparCampos() {
 }
 
 // ===================================================================
-// FUNÇÃO 'preencherCampos' COM A LÓGICA DE EXTRAÇÃO MELHORADA
+// FUNÇÃO 'preencherCampos' COM LÓGICA DE EXTRAÇÃO CORRIGIDA
 // ===================================================================
 function preencherCampos() {
   const texto = document.getElementById("descricaoAntiga").value;
@@ -69,7 +69,7 @@ function preencherCampos() {
     }
   };
 
-  // 1. Extrair Código (lógica mantida, pois já era robusta)
+  // 1. Extrair Código (Lógica mantida)
   let codigo = "";
   const siglas = [
     'AE', 'AM', 'AT', 'BA', 'BC', 'BD', 'BE', 'BG', 'BI', 'BL', 'BM', 'BO', 'BT', 'BX', 'CA', 'CB', 'CC', 'CD', 
@@ -88,7 +88,7 @@ function preencherCampos() {
   }
   setFieldValue("codigo", codigo);
 
-  // 2. Extrair Referência (lógica mantida)
+  // 2. Extrair Referência (Lógica mantida)
   let ref = "";
   for (const line of lines) {
     const match = line.trim().match(/^01\s*[—–-]\s*(.*)/);
@@ -99,59 +99,78 @@ function preencherCampos() {
   }
   setFieldValue("ref", ref);
 
-  // 3. Nova Função de Extração de Seção (MAIS ROBUSTA)
-  const findSection = (startLabels) => {
+  // Marcadores de parada para todas as seções
+  const ALL_STOP_LABELS = [
+      "especificação", "especificações", "especificacao", "especificacoes",
+      "peça aplicada em:", "aplicação:", "oem", "obs:", 
+      "informações sobre o produto", "dúvidas?", "garantia do vendedor", 
+      "atenção", "importante!", "antes de efetuar a compra"
+  ];
+
+  // 3. NOVA FUNÇÃO DE EXTRAÇÃO (Mais inteligente)
+  const findContent = (labels) => {
     let content = [];
     let startIndex = -1;
+    let contentOnSameLine = "";
 
-    // Encontra a linha onde a seção começa
+    // Procura a linha que contém o marcador
     for (let i = 0; i < lines.length; i++) {
-      const lowerLine = lines[i].trim().toLowerCase(); // .trim() e toLowerCase() para busca flexível
-      // Verifica se a linha começa com algum dos marcadores
-      if (startLabels.some(start => lowerLine.startsWith(start.toLowerCase()))) {
-        startIndex = i;
-        break;
+      const lowerLine = lines[i].trim().toLowerCase();
+      for (const label of labels) {
+        if (lowerLine.startsWith(label.toLowerCase())) {
+          startIndex = i;
+          // Verifica se há conteúdo na mesma linha, após o marcador
+          const potentialContent = lines[i].trim().substring(label.length).trim();
+          if (potentialContent) {
+            contentOnSameLine = potentialContent;
+          }
+          break;
+        }
       }
+      if (startIndex !== -1) break;
     }
 
-    if (startIndex === -1) return ""; // Se não encontrou, retorna vazio
+    if (startIndex === -1) return ""; // Marcador não encontrado
 
-    // Lista de marcadores que indicam o FIM da seção atual
-    const ALL_STOP_LABELS = [
-        "especificação", "especificações", "especificacao", "especificacoes",
-        "peça aplicada em:", "aplicação:", "oem", "obs:", 
-        "informações sobre o produto", "dúvidas?", "garantia do vendedor", 
-        "atenção", "importante!", "antes de efetuar a compra"
-    ];
+    // Se encontrou conteúdo na mesma linha, retorna ele imediatamente.
+    if (contentOnSameLine) {
+        // Verifica se a próxima linha não é um marcador de parada. Se não for, pode ser uma continuação.
+        if (lines.length > startIndex + 1) {
+            const nextLineTrimmed = lines[startIndex + 1].trim().toLowerCase();
+            const isStopLabel = ALL_STOP_LABELS.some(stop => nextLineTrimmed.startsWith(stop));
+            if (!isStopLabel && nextLineTrimmed) {
+                 // Se não for um marcador de parada, assume que é uma continuação e busca o resto do bloco.
+            } else {
+                return contentOnSameLine; // Se a próxima linha é um marcador, retorna só o conteúdo da mesma linha.
+            }
+        } else {
+            return contentOnSameLine;
+        }
+    }
 
-    // Captura o conteúdo da seção
+    // Se não havia conteúdo na mesma linha, captura as linhas seguintes
     for (let i = startIndex + 1; i < lines.length; i++) {
       const currentLine = lines[i];
       const lowerTrimmedLine = currentLine.trim().toLowerCase();
 
-      // Cria uma lista de marcadores de parada que não inclui os marcadores da seção atual
-      const currentStopLabels = ALL_STOP_LABELS.filter(stop => 
-          !startLabels.some(start => start.toLowerCase().startsWith(stop))
+      const stopLabelsForThisSection = ALL_STOP_LABELS.filter(stop => 
+          !labels.some(start => start.toLowerCase().startsWith(stop))
       );
 
-      // Se a linha atual começar com um marcador de parada, interrompe a captura
-      if (currentStopLabels.some(stop => lowerTrimmedLine.startsWith(stop))) {
+      if (stopLabelsForThisSection.some(stop => lowerTrimmedLine.startsWith(stop))) {
         break;
       }
-      
-      // Para se encontrar uma linha de separadores (ex: "----------")
       if (lowerTrimmedLine.match(/^(\*|=|-){10,}$/)) {
         break;
       }
-
       content.push(currentLine);
     }
     
     return content.join('\n');
   };
 
-  // Use a nova função com todas as variações para cada campo
-  const especificacao = findSection([
+  // Usa a nova função para extrair os dados
+  const especificacao = findContent([
       "Especificação:", 
       "Especificações:", 
       "especificacao:", 
@@ -159,10 +178,10 @@ function preencherCampos() {
   ]);
   setFieldValue("especificacao", especificacao);
 
-  const aplicacao = findSection(["Peça aplicada em:", "Aplicação:"]);
+  const aplicacao = findContent(["Peça aplicada em:", "Aplicação:"]);
   setFieldValue("aplicacao", aplicacao);
 
-  const oem = findSection(["OEM"]);
+  const oem = findContent(["OEM (NUMERAÇÃO ORIGINAL DA PEÇA):", "OEM"]);
   setFieldValue("oem", oem);
 
   document.getElementById("infoAlterados").textContent = `🛠️ Campos alterados: ${alterados}`;
@@ -196,3 +215,4 @@ function gerarDescricao() {
     atualizarHistorico();
   }
 }
+
