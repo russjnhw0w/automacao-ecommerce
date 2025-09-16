@@ -45,113 +45,113 @@ function limparCampos() {
 }
 
 // ===================================================================
-// INÍCIO DA FUNÇÃO 'preencherCampos' (VERSÃO ATUALIZADA COM SIGLAS)
+// FUNÇÃO 'preencherCampos' - VERSÃO CORRIGIDA E SIMPLIFICADA
 // ===================================================================
 function preencherCampos() {
-  const texto = document.getElementById("descricaoAntiga").value;
-  if (!texto.trim()) {
-    alert("Cole uma descrição antiga primeiro!");
-    return;
-  }
-  
-  const lines = texto.split("\n");
-  let alterados = 0;
-
-  const setFieldValue = (id, value) => {
-    const campo = document.getElementById(id);
-    const finalValue = value.trim();
-    if (campo.value !== finalValue) {
-      campo.value = finalValue;
-      if (finalValue) {
-        destacarCampo(id);
-        alterados++;
-      }
-    }
-  };
-
-  // 1. Extrair Código CheckMat Parts (procurando por QUALQUER sigla da lista)
-  let codigo = "";
-  // Lista completa de siglas
-  const siglas = [
-    'AE', 'AM', 'AT', 'BA', 'BC', 'BD', 'BE', 'BG', 'BI', 'BL', 'BM', 'BO', 'BT', 'BX', 'CA', 'CB', 'CC', 'CD', 
-    'CE', 'CI', 'CKC','CKS','CH', 'CM', 'CO', 'CP', 'CR', 'CT', 'CV', 'DF', 'EM', 'EV', 'FL', 'HM', 'HV', 'IO', 'JH', 'LA', 
-    'LI', 'MA', 'MBC', 'MG', 'MP', 'PF', 'PL', 'PV', 'QM', 'RA', 'RD', 'RDE', 'RE', 'RL', 'RMO', 'RQD', 'RSC', 
-    'RTR', 'SA', 'SB', 'SC', 'SD', 'SE', 'SF', 'SG', 'SH', 'SL', 'SM', 'SO', 'SP', 'SR', 'SRO', 'SS', 'ST', 'SV', 
-    'SW', 'SZ', 'TB', 'TD', 'TM', 'TO', 'TP', 'TR', 'TS', 'TZ', 'VB', 'VS', 'VT', 'CK' // Adicionado CK também
-  ];
-  
-  // Cria uma expressão regular que busca por qualquer uma das siglas seguida de um ponto.
-  const regexSiglas = new RegExp(`\\b(${siglas.join('|')})\\.[0-9A-Z-]+\\b`, 'i');
-
-  for (const line of lines) {
-    const match = line.match(regexSiglas);
-    if (match) {
-      codigo = match[0]; // Pega o código completo (ex: SC.12345)
-      break;
-    }
-  }
-  setFieldValue("codigo", codigo);
-
-  // 2. Extrair Referência (procurando por "01 —")
-  let ref = "";
-  for (const line of lines) {
-    const match = line.trim().match(/^01\s*[—–-]\s*(.*)/);
-    if (match && match[1]) {
-      ref = match[1].trim();
-      break;
-    }
-  }
-  setFieldValue("ref", ref);
-
-  // 3. Nova Função de Extração de Seção (Mais Simples e Direta)
-  const findSection = (startLabels) => {
-    let content = [];
-    let startIndex = -1;
-
-    for (let i = 0; i < lines.length; i++) {
-      const lowerLine = lines[i].toLowerCase().trim();
-      if (startLabels.some(start => lowerLine.startsWith(start.toLowerCase()))) {
-        startIndex = i;
-        break;
-      }
+    const texto = document.getElementById("descricaoAntiga").value;
+    if (!texto.trim()) {
+        alert("Cole uma descrição antiga primeiro!");
+        return;
     }
 
-    if (startIndex === -1) return "";
+    const lines = texto.split("\n");
+    let alterados = 0;
 
-    const ALL_STOP_LABELS = [
-        "especificação:", "peça aplicada em:", "aplicação:", "oem", "obs:", 
-        "informações sobre o produto", "dúvidas?", "garantia do vendedor", 
-        "atenção", "importante!", "antes de efetuar a compra"
-    ];
+    const setFieldValue = (id, value) => {
+        const campo = document.getElementById(id);
+        const finalValue = value.trim();
+        if (campo.value !== finalValue) {
+            campo.value = finalValue;
+            if (finalValue) {
+                destacarCampo(id);
+                alterados++;
+            }
+        }
+    };
 
-    for (let i = startIndex + 1; i < lines.length; i++) {
-      const currentLine = lines[i];
-      const lowerTrimmedLine = currentLine.trim().toLowerCase();
-
-      if (ALL_STOP_LABELS.some(stop => lowerTrimmedLine.startsWith(stop))) {
-        break;
-      }
-      
-      if (lowerTrimmedLine.match(/^(\*|=|-){10,}$/)) {
-        break;
-      }
-
-      content.push(currentLine);
+    // --- Lógica de Extração (Mantida) ---
+    let codigo = "";
+    const siglas = ['AE', 'AM', 'AT', 'BA', 'BC', 'BD', 'BE', 'BG', 'BI', 'BL', 'BM', 'BO', 'BT', 'BX', 'CA', 'CB', 'CC', 'CD', 'CE', 'CI', 'CKC', 'CKS', 'CH', 'CM', 'CO', 'CP', 'CR', 'CT', 'CV', 'DF', 'EM', 'EV', 'FL', 'HM', 'HV', 'IO', 'JH', 'LA', 'LI', 'MA', 'MBC', 'MG', 'MP', 'PF', 'PL', 'PV', 'QM', 'RA', 'RD', 'RDE', 'RE', 'RL', 'RMO', 'RQD', 'RSC', 'RTR', 'SA', 'SB', 'SC', 'SD', 'SE', 'SF', 'SG', 'SH', 'SL', 'SM', 'SO', 'SP', 'SR', 'SRO', 'SS', 'ST', 'SV', 'SW', 'SZ', 'TB', 'TD', 'TM', 'TO', 'TP', 'TR', 'TS', 'TZ', 'VB', 'VS', 'VT', 'CK'];
+    const regexSiglas = new RegExp(`\\b(${siglas.join('|')})\\.[0-9A-Z-]+\\b`, 'i');
+    for (const line of lines) {
+        const match = line.match(regexSiglas);
+        if (match) {
+            codigo = match[0];
+            break;
+        }
     }
-    
-    return content.join('\n');
-  };
+    setFieldValue("codigo", codigo);
 
-  const especificacao = findSection(["Especificação:"]);
-  setFieldValue("especificacao", especificacao);
+    let ref = "";
+    for (const line of lines) {
+        const match = line.trim().match(/^01\s*[—–-]\s*(.*)/);
+        if (match && match[1]) {
+            ref = match[1].trim();
+            break;
+        }
+    }
+    setFieldValue("ref", ref);
 
-  const aplicacao = findSection(["Peça aplicada em:", "Aplicação:"]);
-  setFieldValue("aplicacao", aplicacao);
+    // --- NOVA LÓGICA DE EXTRAÇÃO DE SEÇÃO (MUITO MAIS SIMPLES) ---
+    const findSectionContent = (startLabels, stopLabels) => {
+        let content = [];
+        let startIndex = -1;
 
-  const oem = findSection(["OEM"]);
-  setFieldValue("oem", oem);
+        // 1. Encontra a linha inicial e extrai conteúdo da mesma linha, se houver
+        for (let i = 0; i < lines.length; i++) {
+            const trimmedLine = lines[i].trim();
+            for (const label of startLabels) {
+                if (trimmedLine.toLowerCase().startsWith(label.toLowerCase())) {
+                    startIndex = i;
+                    const contentOnSameLine = trimmedLine.substring(label.length).trim();
+                    if (contentOnSameLine) {
+                        return contentOnSameLine; // Encontrou na mesma linha, retorna imediatamente
+                    }
+                    break;
+                }
+            }
+            if (startIndex !== -1) break;
+        }
 
-  document.getElementById("infoAlterados").textContent = `🛠️ Campos alterados: ${alterados}`;
+        if (startIndex === -1) return ""; // Se não achou o marcador, retorna vazio
+
+        // 2. Se não havia conteúdo na mesma linha, busca nas linhas seguintes
+        for (let i = startIndex + 1; i < lines.length; i++) {
+            const currentLine = lines[i];
+            const lowerTrimmedLine = currentLine.trim().toLowerCase();
+
+            // Para se encontrar qualquer marcador de parada
+            if (stopLabels.some(stop => lowerTrimmedLine.startsWith(stop.toLowerCase()))) {
+                break;
+            }
+            // Para se encontrar uma linha de separadores (ex: "----------")
+            if (lowerTrimmedLine.match(/^(\*|=|-){10,}$/)) {
+                break;
+            }
+            content.push(currentLine);
+        }
+        return content.join('\n');
+    };
+
+    // Define os marcadores de início e parada para cada campo
+    const especificacaoLabels = ["Especificação:", "Especificações:", "especificacao:", "especificacoes:"];
+    const aplicacaoLabels = ["Peça aplicada em:", "Aplicação:"];
+    const oemLabels = ["OEM (NUMERAÇÃO ORIGINAL DA PEÇA):", "OEM"];
+    const obsLabels = ["Obs:"];
+
+    // Define todos os marcadores que podem parar uma seção
+    const allStopLabels = [...aplicacaoLabels, ...oemLabels, ...obsLabels, "informações sobre o produto", "atenção", "importante!"];
+
+    // Executa a busca para cada campo
+    const especificacao = findSectionContent(especificacaoLabels, allStopLabels);
+    const aplicacao = findSectionContent(aplicacaoLabels, [...oemLabels, ...obsLabels, "informações sobre o produto", "atenção"]);
+    const oem = findSectionContent(oemLabels, [...obsLabels, "informações sobre o produto", "atenção"]);
+
+    setFieldValue("especificacao", especificacao);
+    setFieldValue("aplicacao", aplicacao);
+    setFieldValue("oem", oem);
+
+    document.getElementById("infoAlterados").textContent = `🛠️ Campos alterados: ${alterados}`;
 }
 // ===================================================================
 // FIM DA FUNÇÃO 'preencherCampos'
@@ -182,5 +182,6 @@ function gerarDescricao() {
     atualizarHistorico();
   }
 }
+
 
 
