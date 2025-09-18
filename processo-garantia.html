@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processo de Garantia - Ferramentas CSR</title>
+    <link rel="stylesheet" href="processo-garantia.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-button" title="Adicione o link do seu portal principal aqui">← Voltar ao Portal</a>
+            <div class="header-content">
+                <h1>Processo: Acionamento de Garantia</h1>
+                <p>Siga os passos para gerenciar solicitações de garantia de forma correta e padronizada.</p>
+            </div>
+        </header>
+
+        <main class="checklist">
+            <!-- PASSO 1: ANÁLISE DO PRAZO -->
+            <div class="step" id="step-1">
+                <div class="step-header">
+                    <input type="checkbox" id="check-1">
+                    <label for="check-1"><strong>Passo 1:</strong> Analisar o Prazo da Reclamação</label>
+                </div>
+                <div class="step-details">
+                    <p>Verifique a data de recebimento do produto pelo cliente e selecione o prazo correspondente:</p>
+                    <select id="prazoGarantia">
+                        <option value="7dias" selected>Até 7 dias (Direito de Arrependimento)</option>
+                        <option value="30dias">Entre 8 e 30 dias (Garantia da Loja)</option>
+                        <option value="90dias">Entre 31 e 90 dias (Garantia Legal)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- PASSO 2: DIREITOS E DEVERES (CONTEÚDO DINÂMICO) -->
+            <div class="step" id="step-2">
+                <div class="step-header">
+                    <input type="checkbox" id="check-2">
+                    <label for="check-2"><strong>Passo 2:</strong> Entender Direitos e Custos de Frete</label>
+                </div>
+                <div class="step-details">
+                    <!-- Instruções para 7 Dias -->
+                    <div class="prazo-instruction" id="instr-7dias">
+                        <div class="alert info">
+                            <strong>Direito de Arrependimento (CDC, Art. 49)</strong>
+                            <p>O cliente pode devolver por qualquer motivo. Não precisa ser defeito.</p>
+                            <ul>
+                                <li><strong>Custo do Frete (Ida e Volta):</strong> 100% nosso custo. O cliente tem direito a devolução gratuita.</li>
+                                <li><strong>Ação:</strong> Aceitar a devolução incondicionalmente e fornecer meio para devolução gratuita.</li>
+                            </ul>
+                        </div>
+                        <button class="copy-button" data-text="Olá! Vimos que sua compra está dentro do prazo de 7 dias. Você tem todo o direito de devolver o produto gratuitamente, não importa o motivo. Por favor, inicie o pedido de devolução na plataforma (Mercado Livre/Shopee) ou nos avise (se for em nosso site) para gerarmos sua etiqueta de postagem reversa.">Copiar Mensagem (7 Dias)</button>
+                    </div>
+                    <!-- Instruções para 30 Dias -->
+                    <div class="prazo-instruction" id="instr-30dias" style="display: none;">
+                        <div class="alert warning">
+                            <strong>Garantia da Loja (Defeito)</strong>
+                            <p>A garantia cobre apenas defeitos de fabricação. O cliente precisa comprovar o defeito.</p>
+                            <ul>
+                                <li><strong>Custo do Frete (Ida e Volta):</strong> 100% nosso custo, desde que o defeito seja confirmado.</li>
+                                <li><strong>Ação:</strong> Solicitar evidências (vídeos) do defeito antes de prosseguir.</li>
+                            </ul>
+                        </div>
+                        <button class="copy-button" data-text="Olá! Para acionarmos a garantia do produto, por favor, nos envie um vídeo curto mostrando o defeito em funcionamento. Se o defeito de fabricação for confirmado, cobriremos todos os custos de frete para a troca.">Copiar Mensagem (30 Dias)</button>
+                    </div>
+                    <!-- Instruções para 90 Dias -->
+                    <div class="prazo-instruction" id="instr-90dias" style="display: none;">
+                        <div class="alert danger">
+                            <strong>Garantia Legal (Defeito - CDC, Art. 26)</strong>
+                            <p>A garantia legal cobre apenas defeitos de fabricação (vícios aparentes ou ocultos).</p>
+                            <ul>
+                                <li><strong>Custo do Frete (Ida e Volta):</strong> 100% nosso custo, desde que o defeito seja confirmado.</li>
+                                <li><strong>Ação:</strong> Solicitar evidências (vídeos) do defeito. O processo é o mesmo da garantia de 30 dias.</li>
+                            </ul>
+                        </div>
+                        <button class="copy-button" data-text="Olá! Sua compra está dentro da garantia legal de 90 dias. Para prosseguirmos com a análise, por favor, nos envie um vídeo que mostre o defeito do produto. Se confirmarmos o vício de fabricação, faremos a troca ou reparo sem nenhum custo de frete para você.">Copiar Mensagem (90 Dias)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASSO 3: LOGÍSTICA REVERSA -->
+            <div class="step" id="step-3">
+                <div class="step-header">
+                    <input type="checkbox" id="check-3">
+                    <label for="check-3"><strong>Passo 3:</strong> Fornecer Meio para Devolução</label>
+                </div>
+                <div class="step-details">
+                    <p>Após confirmar o direito do cliente, forneça a etiqueta de logística reversa.</p>
+                    <ul>
+                        <li><strong>Mercado Livre / Shopee:</strong> Oriente o cliente a abrir a reclamação/pedido de devolução na plataforma para obter a etiqueta.</li>
+                        <li><strong>Site Próprio:</strong> Gere a etiqueta em seu sistema (Melhor Envio, etc.) e envie ao cliente.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PASSO 4: ANÁLISE E SOLUÇÃO -->
+            <div class="step" id="step-4">
+                <div class="step-header">
+                    <input type="checkbox" id="check-4">
+                    <label for="check-4"><strong>Passo 4:</strong> Analisar Produto e Enviar Solução</label>
+                </div>
+                <div class="step-details">
+                    <p>Ao receber o produto, inspecione-o para confirmar o defeito (se aplicável) e a ausência de mau uso.</p>
+                    <p>Envie a solução ao cliente (novo produto ou estorno) e comunique o novo código de rastreio, se houver.</p>
+                    <button class="copy-button" data-text="Ótima notícia! Já recebemos/identificamos a postagem do seu produto e a solução já está a caminho. O código de rastreio é [INSERIR CÓDIGO AQUI]. Agradecemos pela sua paciência.">Copiar Mensagem (Solução Enviada)</button>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <button id="resetButton">Reiniciar Checklist</button>
+        </footer>
+    </div>
+    <script src="processo-garantia.js"></script>
+</body>
+</html>
