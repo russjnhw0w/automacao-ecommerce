@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procedimento de Devolução - Ferramentas CSR</title>
+    <link rel="stylesheet" href="processo-devolucao.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+    <!-- O link de voltar agora fica sozinho -->
+    <a href="#" class="back-button" title="Adicione o link do seu portal principal aqui">← Voltar ao Portal</a>
+    
+    <!-- Agrupamos o título e o parágrafo -->
+    <div class="header-content">
+        <h1>Procedimento: Como Tratar Devoluções</h1>
+        <p>Siga os passos para um processo de devolução eficiente e padronizado.</p>
+    </div>
+</header>
+
+        <main class="checklist">
+            <!-- PASSO 1: IDENTIFICAÇÃO -->
+            <div class="step" id="step-1">
+                <div class="step-header">
+                    <input type="checkbox" id="check-1">
+                    <label for="check-1"><strong>Passo 1:</strong> Identificar o Motivo da Devolução</label>
+                </div>
+                <div class="step-details">
+                    <p>Converse com o cliente e selecione o motivo principal da devolução:</p>
+                    <select id="motivoDevolucao">
+                        <option value="arrependimento" selected>Arrependimento ou Compra por Engano</option>
+                        <option value="defeito">Produto com Suposto Defeito</option>
+                        <option value="incompatibilidade">Produto Incompatível</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- PASSO 2: ORIENTAÇÃO AO CLIENTE -->
+            <div class="step" id="step-2">
+                <div class="step-header">
+                    <input type="checkbox" id="check-2">
+                    <label for="check-2"><strong>Passo 2:</strong> Orientar Cliente a Gerar Etiqueta</label>
+                </div>
+                <div class="step-details">
+                    <p>Oriente o cliente a iniciar o processo pela plataforma para obter a etiqueta de envio reverso.</p>
+                    <!-- CORREÇÃO: Adicionada a classe "copy-button" -->
+                    <button class="copy-button" data-text="Olá! Para iniciar a devolução, por favor, acesse o detalhe da sua compra, clique em 'Preciso de ajuda' e siga os passos para 'Devolver o produto'. A plataforma irá gerar uma etiqueta de envio para você postar o item de volta sem custos.">Copiar Mensagem Padrão</button>
+                    <div class="alert warning">
+                        <strong>Atenção:</strong> Nunca combine devoluções por fora da plataforma. O uso da etiqueta oficial garante a segurança do processo para ambas as partes.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASSO 3: RECEBIMENTO E INSPEÇÃO -->
+            <div class="step" id="step-3">
+                <div class="step-header">
+                    <input type="checkbox" id="check-3">
+                    <label for="check-3"><strong>Passo 3:</strong> Receber e Inspecionar o Produto</label>
+                </div>
+                <div class="step-details">
+                    <p>Ao receber o produto, realize uma inspeção completa. Marque os itens verificados:</p>
+                    <div class="inspection-list">
+                        <label><input type="checkbox"> Embalagem original preservada.</label>
+                        <label><input type="checkbox"> Produto sem marcas de uso, quedas ou avarias.</label>
+                        <label><input type="checkbox"> Todos os acessórios e manuais inclusos.</label>
+                        <label><input type="checkbox"> Número de série (se aplicável) confere com o enviado.</label>
+                    </div>
+                    <div class="alert danger" id="irregularidade-box">
+                        <strong>Irregularidade Encontrada?</strong> Se o produto apresentar mau uso, avarias ou itens faltantes, <strong>NÃO aprove o reembolso</strong>. Tire fotos/vídeos, abra uma reclamação na plataforma e anexe as provas.
+                        <!-- CORREÇÃO: Adicionada a classe "copy-button" -->
+                        <button class="copy-button small" data-text="Olá! Recebemos o produto devolvido, porém constatamos [descrever o problema: ex: marcas de uso, peça faltando]. Conforme as políticas da plataforma, a devolução só é aceita com o produto em perfeitas condições. Abrimos uma mediação junto ao marketplace para resolver o caso.">Copiar Mensagem (Irregularidade)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASSO 4: FINALIZAÇÃO -->
+            <div class="step" id="step-4">
+                <div class="step-header">
+                    <input type="checkbox" id="check-4">
+                    <label for="check-4"><strong>Passo 4:</strong> Finalizar o Processo</label>
+                </div>
+                <div class="step-details">
+                    <div id="final-arrependimento" class="final-step">
+                        <p>Se o produto estiver em perfeitas condições, confirme o recebimento na plataforma para que o reembolso seja liberado ao cliente.</p>
+                        <div class="alert success">
+                            <strong>Processo Concluído:</strong> O produto retorna ao estoque e o cliente recebe o estorno.
+                        </div>
+                    </div>
+                    <div id="final-defeito" class="final-step" style="display: none;">
+                        <p>Se o produto estiver em perfeitas condições (além do defeito alegado), confirme o recebimento para liberar o estorno.</p>
+                        <p><strong>Ação Necessária:</strong> Encaminhe o produto para o setor técnico para análise do defeito e, se possível, reparo. Não retorne o produto ao estoque de venda.</p>
+                        <div class="alert info">
+                            <strong>Dica:</strong> Este processo de análise ajuda a identificar lotes problemáticos e a melhorar a qualidade dos nossos produtos.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <button id="resetButton">Reiniciar Checklist</button>
+        </footer>
+    </div>
+    <script src="processo-devolucao.js"></script>
+</body>
+</html>
