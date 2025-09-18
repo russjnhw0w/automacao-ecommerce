@@ -1,0 +1,138 @@
+/* --- GERAL --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+h1, h2 {
+    color: #212529;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+/* --- BUSCA --- */
+.search-container {
+    margin-bottom: 30px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#searchInput:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* --- SEÇÕES DE CONTEÚDO --- */
+.content-section {
+    margin-bottom: 40px;
+}
+
+/* --- FAQ --- */
+.faq-item {
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fdfdff;
+}
+
+.faq-question .arrow {
+    transition: transform 0.3s;
+}
+
+.faq-answer {
+    padding: 0; /* Removido o padding lateral daqui */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out; /* Removida a transição de padding */
+    background-color: #ffffff;
+}
+
+.faq-answer p {
+    margin: 0;
+    padding: 15px; /* Adicionado padding aqui para o texto */
+    border-top: 1px solid #e9ecef;
+}
+
+/* --- CORREÇÃO DO BOTÃO --- */
+.copy-button {
+    display: block;
+    width: 100%; /* Ocupa 100% da largura do pai */
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background-color 0.2s;
+    /* Removemos as margens negativas e os cantos arredondados daqui,
+       pois o pai (.faq-item) já tem overflow:hidden e border-radius */
+}
+
+.copy-button:hover {
+    background-color: #0056b3;
+}
+
+.copy-button.copied {
+    background-color: #28a745;
+}
+
+/* --- PROCEDIMENTOS (SOPs) --- */
+.sop-item {
+    background-color: #fdfdff;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.sop-item h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+
+.sop-item ol {
+    padding-left: 20px;
+}
+
+.sop-item li {
+    margin-bottom: 10px;
+}
+
+/* --- CLASSE PARA ESCONDER ITENS NA BUSCA --- */
+.hidden {
+    display: none;
+}

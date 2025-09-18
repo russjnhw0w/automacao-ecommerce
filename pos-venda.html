@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pós-Venda - Ferramentas CSR</title>
+    <!-- Link para o arquivo de estilos CSS -->
+    <link rel="stylesheet" href="pos-venda.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Central de Pós-Venda</h1>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar por pergunta, resposta ou procedimento...">
+        </div>
+
+        <!-- Seção de Respostas Rápidas (FAQ) -->
+        <section class="content-section" id="faq-section">
+            <h2>Respostas Rápidas (FAQ)</h2>
+            
+            <div class="faq-item searchable">
+                <div class="faq-question">
+                    <span>Qual o prazo de envio do meu pedido?</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Olá! O prazo de postagem do seu pedido é de até 24 horas úteis após a confirmação do pagamento. Assim que for postado, você receberá o código de rastreio por e-mail e no detalhe da sua compra.</p>
+                    <button class="copy-button">Copiar Resposta</button>
+                </div>
+            </div>
+
+            <div class="faq-item searchable">
+                <div class="faq-question">
+                    <span>O produto é compatível com o meu veículo/bicicleta?</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Olá! Para garantir a compatibilidade, por favor, verifique os detalhes (ano, modelo, motor) na descrição do anúncio. Se ainda tiver dúvidas, nos informe o chassi do seu veículo (ou modelo exato da bicicleta) que verificamos para você.</p>
+                    <button class="copy-button">Copiar Resposta</button>
+                </div>
+            </div>
+
+            <div class="faq-item searchable">
+                <div class="faq-question">
+                    <span>Como faço para rastrear meu pedido?</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Olá! Você pode rastrear seu pedido diretamente na plataforma onde realizou a compra, na seção "Minhas Compras". O código de rastreio e o status da entrega são atualizados automaticamente lá.</p>
+                    <button class="copy-button">Copiar Resposta</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Procedimentos (SOPs) -->
+        <section class="content-section" id="sop-section">
+            <h2>Procedimentos (SOPs)</h2>
+
+            <div class="sop-item searchable">
+                <h3>Como Tratar Devoluções</h3>
+                <ol>
+                    <li><strong>Verificar o Motivo:</strong> Entenda se a devolução é por arrependimento, defeito ou incompatibilidade.</li>
+                    <li><strong>Gerar Etiqueta de Devolução:</strong> Oriente o cliente a abrir o pedido de devolução na plataforma para obter a etiqueta de envio reverso.</li>
+                    <li><strong>Aguardar Recebimento:</strong> Informe ao cliente que o estorno será processado assim que o produto retornar e for verificado.</li>
+                    <li><strong>Analisar o Produto:</strong> Ao receber, verifique se o produto está em sua embalagem original e sem sinais de mau uso.</li>
+                    <li><strong>Finalizar o Processo:</strong> Confirme o recebimento na plataforma para que o estorno seja liberado ao cliente.</li>
+                </ol>
+            </div>
+
+            <div class="sop-item searchable">
+                <h3>Processo de Garantia</h3>
+                <ol>
+                    <li><strong>Solicitar Evidências:</strong> Peça ao cliente fotos e vídeos que demonstrem o defeito alegado.</li>
+                    <li><strong>Analisar o Caso:</strong> Verifique a data da compra para confirmar se o produto ainda está no período de garantia (geralmente 90 dias).</li>
+                    <li><strong>Oferecer Suporte:</strong> Se for um problema simples de instalação, forneça as orientações necessárias.</li>
+                    <li><strong>Iniciar a Troca:</strong> Se o defeito for confirmado, inicie o processo de troca, gerando uma etiqueta de logística reversa para o cliente enviar o produto defeituoso.</li>
+                    <li><strong>Enviar Novo Produto:</strong> Após o recebimento e análise do item com defeito, envie um novo produto para o cliente e informe o novo código de rastreio.</li>
+                </ol>
+            </div>
+        </section>
+    </div>
+
+    <!-- CORREÇÃO: Link para o arquivo de script JavaScript adicionado aqui -->
+    <script src="pos-venda.js"></script>
+</body>
+</html>
